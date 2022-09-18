@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Majora</string>
+    <string name="about">关于</string>
+    <string name="author">成都因体</string>
+    <string name="server">服务器</string>
+    <string name="server_host">服务器host</string>
+    <string name="port">端口</string>
+    <string name="default_server_host">majora.iinti.cn</string>
+    <string name="default_server_port">5879</string>
+    <string name="majora_app">MajoraApp</string>
+    <string name="nav_item_main">面板</string>
+    <string name="nav_item_logs">日志</string>
+    <string name="nav_item_settings">设置</string>
+    <string name="nav_item_support">支持</string>
+    <string name="nav_item_about">关于</string>
+
+    <string name="settings_group_app">应用</string>
+    <string name="phone_identifier">结算账户</string>
+
+    <string name="support_framework_label">框架/安装支持</string>
+    <string name="support_faq_label">常见问题/已知问题</string>
+    <string name="support_faq_url" translatable="false">https://github.com/yint-tech/majora</string>
+    <string name="support_donate_url" translatable="false">https://github.com/yint-tech/majora</string>
+    <string name="about_support" translatable="false">https://github.com/yint-tech//majora</string>
+
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+    <string name="about_developers_label">主要开发者</string>
+    <string name="about_developers"> <a href="https://github.com/yint-tech">成都因体信息技术有限公司</a> </string>
+    <string name="about_source" translatable="false">https://github.com/yint-tech/majora</string>
+
+    <string name="settings_theme">主题</string>
+    <string name="settings_theme_light">亮色</string>
+    <string name="settings_theme_dark">暗色</string>
+    <string name="settings_theme_black">黑色（对 AMOLED 屏幕有益）</string>
+    <string name="settings_default_view">默认视图</string>
+
+    <string name="menuSend">发送</string>
+    <string name="menuSaveToSd">保存到 SD 卡</string>
+    <string name="logs_save_failed">无法将日志写入 SD 卡：</string>
+    <string name="sdcard_not_writable">SD 卡未找到或不可写入</string>
+    <string name="menuClearLog">立刻清理日志</string>
+    <string name="logs_cleared">日志清理成功</string>
+    <string name="logs_clear_failed">无法清理日志：</string>
+    <string name="log_is_empty">日志为空</string>
+    <string name="scroll_top">滚动页面至顶部</string>
+    <string name="permissionNotGranted">没有写入外部存储权限该功能将不能工作。</string>
+    <string name="scroll_bottom">拖动至到底端</string>
+
+
+    <string name="loading">载入中…</string>
+    <string name="menuReload">重新载入</string>
+
+
+    <string name="about_version_label">版本</string>
+    <string name="about_libraries_label">使用的库文件</string>
+    <string name="about_source_label">源码</string>
+    <string name="op_panel">操作面板</string>
+    <string name="txt_reDial">重播</string>
+    <string name="txt_reset_device_id">重制设备id</string>
+    <string name="majora_status">Majora状态</string>
+    <string name="root_available">root</string>
+    <string name="client_id">clientId</string>
+    <string name="server_config">服务器配置</string>
+    <string name="binding_account">结算账号</string>
+    <string name="settings_group_local">本地配置</string>
+    <string name="auto_redial">自动重播</string>
+
+</resources>

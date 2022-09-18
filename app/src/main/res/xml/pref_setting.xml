@@ -1,0 +1,27 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="@string/server">
+
+        <EditTextPreference
+            android:defaultValue="@string/default_server_host"
+            android:key="server_host"
+            android:persistent="true"
+            android:title="@string/server_host" />
+        <EditTextPreference
+            android:defaultValue="@string/default_server_port"
+            android:digits="0123456789"
+            android:inputType="numberDecimal"
+            android:key="server_port"
+            android:title="@string/port" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/about">
+        <Preference
+            android:key="author"
+            android:summary="iinti.cn"
+            android:title="@string/author" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

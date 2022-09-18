@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/server">
+
+        <cn.iinti.majora.adr.ui.widget.EditSummaryPreference
+            android:defaultValue="@string/default_server_host"
+            android:key="server_host"
+            android:persistent="true"
+            android:title="@string/server_host" />
+        <cn.iinti.majora.adr.ui.widget.EditSummaryPreference
+            android:defaultValue="@string/default_server_port"
+            android:digits="0123456789"
+            android:inputType="numberDecimal"
+            android:key="server_port"
+            android:title="@string/port" />
+        <cn.iinti.majora.adr.ui.widget.EditSummaryPreference
+            android:defaultValue=""
+            android:key="account_identifier"
+            android:title="@string/phone_identifier">
+
+        </cn.iinti.majora.adr.ui.widget.EditSummaryPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="group_app"
+        android:title="@string/settings_group_app">
+
+        <cn.iinti.majora.adr.ui.widget.IntegerListPreference
+            android:defaultValue="0"
+            android:entries="@array/theme_texts"
+            android:entryValues="@array/theme_values"
+            android:key="theme"
+            android:summary="%s"
+            android:title="@string/settings_theme"
+            app:useStockLayout="true" />
+
+
+        <cn.iinti.majora.adr.ui.widget.IntegerListPreference
+            android:defaultValue="0"
+            android:entries="@array/default_view_texts"
+            android:entryValues="@array/default_view_values"
+            android:key="default_view"
+            android:summary="%s"
+            android:title="@string/settings_default_view"
+            app:useStockLayout="true" />
+
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="group_local"
+        android:title="@string/settings_group_local">
+
+        <SwitchPreference
+            android:title="@string/auto_redial"
+            android:key="auto_redial"
+            android:defaultValue="true"
+            />
+
+    </PreferenceCategory>
+</PreferenceScreen>
