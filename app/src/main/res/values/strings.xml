@@ -19,15 +19,15 @@
 
     <string name="support_framework_label">框架/安装支持</string>
     <string name="support_faq_label">常见问题/已知问题</string>
-    <string name="support_faq_url" translatable="false">https://github.com/yint-tech/majora</string>
-    <string name="support_donate_url" translatable="false">https://github.com/yint-tech/majora</string>
-    <string name="about_support" translatable="false">https://github.com/yint-tech//majora</string>
+    <string name="support_faq_url" translatable="false">https://github.com/yint-tech/majora-adr</string>
+    <string name="support_donate_url" translatable="false">https://github.com/yint-tech/majora-adr</string>
+    <string name="about_support" translatable="false">https://github.com/yint-tech/majora-adr</string>
 
     <string name="navigation_drawer_open">打开导航抽屉</string>
     <string name="navigation_drawer_close">关闭导航抽屉</string>
     <string name="about_developers_label">主要开发者</string>
     <string name="about_developers"> <a href="https://github.com/yint-tech">成都因体信息技术有限公司</a> </string>
-    <string name="about_source" translatable="false">https://github.com/yint-tech/majora</string>
+    <string name="about_source" translatable="false">https://github.com/yint-tech/majora-adr</string>
 
     <string name="settings_theme">主题</string>
     <string name="settings_theme_light">亮色</string>
