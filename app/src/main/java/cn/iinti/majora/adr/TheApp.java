@@ -11,7 +11,7 @@ import android.os.Build;
 
 import java.io.File;
 
-import eu.chainfire.libsuperuser.Shell;
+import cn.iinti.majora.adr.majora.CombineShellWrapper;
 
 public class TheApp extends Application {
     private File logFile;
@@ -30,13 +30,9 @@ public class TheApp extends Application {
     public void onCreate() {
         super.onCreate();
         theApp = this;
-        new Thread("makeSu") {
-            @Override
-            public void run() {
-                Shell.SU.available();
-            }
-        }.start();
 
+        // init shell wrapper
+        CombineShellWrapper.initShizhuku();
         createLogFile();
 
         setNotifyChannel(this);

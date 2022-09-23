@@ -10,7 +10,7 @@ android {
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
         versionCode 7
-        versionName "1.7"
+        versionName "1.8"
         archivesBaseName = "Majora_${versionName}".replace(' ', '_')
     }
 
@@ -69,5 +69,9 @@ dependencies {
     implementation 'com.github.getActivity:XToast:8.1'
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.1'
     implementation 'com.afollestad.material-dialogs:commons:0.9.0.2'
+
+    def shizuku_version = '12.1.0'
+    implementation "dev.rikka.shizuku:api:$shizuku_version"
+    implementation "dev.rikka.shizuku:provider:$shizuku_version"
 
 }

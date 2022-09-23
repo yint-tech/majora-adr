@@ -12,7 +12,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <!-- 我们使用了shizuku，shizuku要求最少的sdk level是23，我们希望在Android5.0以上的手机都可以运行
+             看了下shizuku的依赖，里面并没有使用到任何高版本的依赖，所以直接忽略警告，降低sdk level限制
+             这是因为majora 的客户端需要可以运行在较低版本的手机上。
+             当然如果你是4.4一下的Android手机，那么获取root权限应该非常容易，几乎不需要考虑使用shizuku
+         -->
+    <uses-sdk tools:overrideLibrary="rikka.shizuku.provider,rikka.shizuku.api,rikka.shizuku.shared,rikka.shizuku.aidl" />
 
     <application
         android:name=".TheApp"
@@ -22,6 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".ui.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,6 +54,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <provider
+            android:name="rikka.shizuku.ShizukuProvider"
+            android:authorities="${applicationId}.shizuku"
+            android:enabled="true"
+            android:exported="true"
+            android:multiprocess="false"
+            android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
     </application>
 
 

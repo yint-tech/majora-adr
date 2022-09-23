@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.Browser;
 import android.support.customtabs.CustomTabsIntent;
@@ -16,10 +15,7 @@ import android.text.util.Linkify;
 import cn.iinti.majora.adr.R;
 import cn.iinti.majora.adr.ui.DefaultSharedPreferenceHolder;
 
-import java.util.List;
-
 public final class NavUtil {
-    public static final String SETTINGS_CATEGORY = "de.robv.android.xposed.category.MODULE_SETTINGS";
 
     private static Uri parseURL(String str) {
         if (str == null || str.isEmpty())
@@ -75,24 +71,7 @@ public final class NavUtil {
 
 
     private static Intent getSettingsIntent(Context activity, String packageName) {
-        // taken from
-        // ApplicationPackageManager.getLaunchIntentForPackage(String)
-        // first looks for an Xposed-specific category, falls back to
-        // getLaunchIntentForPackage
         PackageManager pm = activity.getPackageManager();
-
-        Intent intentToResolve = new Intent(Intent.ACTION_MAIN);
-        intentToResolve.addCategory(SETTINGS_CATEGORY);
-        intentToResolve.setPackage(packageName);
-        List<ResolveInfo> ris = pm.queryIntentActivities(intentToResolve, 0);
-
-        if (ris == null || ris.size() <= 0) {
-            return pm.getLaunchIntentForPackage(packageName);
-        }
-
-        Intent intent = new Intent(intentToResolve);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(ris.get(0).activityInfo.packageName, ris.get(0).activityInfo.name);
-        return intent;
+        return pm.getLaunchIntentForPackage(packageName);
     }
 }

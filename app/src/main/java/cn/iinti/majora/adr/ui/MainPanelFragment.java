@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import cn.iinti.majora.adr.R;
 import cn.iinti.majora.adr.TheApp;
+import cn.iinti.majora.adr.majora.CombineShellWrapper;
 import cn.iinti.majora.adr.majora.MajoraClientService;
 import cn.iinti.majora.adr.utils.ClientIdentifier;
 import cn.iinti.majora.adr.utils.CommonUtils;
@@ -31,7 +32,7 @@ public class MainPanelFragment extends Fragment {
         super.onResume();
         SharedPreferences spf = PreferenceManager.getDefaultSharedPreferences(TheApp.getApplication());
         boolean autoRedial = spf.getBoolean("auto_redial", true)
-                && Shell.SU.available();
+                && CombineShellWrapper.available();
 
         autoRedialPanel.setVisibility(autoRedial ? View.VISIBLE : View.GONE);
     }
@@ -61,7 +62,7 @@ public class MainPanelFragment extends Fragment {
 
         Button btnReDial = view.findViewById(R.id.btn_redial);
         btnReDial.setOnClickListener(view1 -> {
-            if (Shell.SU.available()) {
+            if (CombineShellWrapper.available()) {
                 MajoraClientService.reDial(1000);
             } else {
                 Toast.makeText(getActivity(), "重播需要root权限", Toast.LENGTH_SHORT).show();

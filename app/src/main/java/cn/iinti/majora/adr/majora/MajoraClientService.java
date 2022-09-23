@@ -4,17 +4,17 @@ import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
+import java.util.List;
+import java.util.Map;
+
 import cn.iinti.majora.adr.TheApp;
 import cn.iinti.majora.adr.utils.ClientIdentifier;
 import cn.iinti.majora.adr.utils.CommonUtils;
+import cn.iinti.majora.adr.utils.Joiner;
 import cn.iinti.majora.adr.utils.PermissionUtils;
 import cn.iinti.majora.client.sdk.client.MajoraClient;
 import cn.iinti.majora.client.sdk.cmd.handlers.RedialHandler;
 import cn.iinti.majora.client.sdk.log.MajoraLogger;
-
-import java.util.Map;
-
-import eu.chainfire.libsuperuser.Shell;
 
 public class MajoraClientService {
     private static boolean started = false;
@@ -24,9 +24,9 @@ public class MajoraClientService {
 
         @Override
         public String envOk() {
-            if (!Shell.SU.available()) {
+            if (!CombineShellWrapper.available()) {
                 // 没有root权限，那就无法进行飞行模式切换
-                return "redial need rot permission";
+                return "redial need operator permission";
             }
             return null;
         }
@@ -92,7 +92,7 @@ public class MajoraClientService {
 
 
     public static void reDial(int offlineWaitMilis) {
-        if (!Shell.SU.available()) {
+        if (!CombineShellWrapper.available()) {
             // 没有root权限，那就无法进行飞行模式切换
             return;
         }
@@ -122,10 +122,13 @@ public class MajoraClientService {
 
     private static void reDialImpl() {
         try {
-            Shell.SU.run("settings put global airplane_mode_on 1 && am broadcast -a android.intent.action.AIRPLANE_MODE --ez state true");
-
+            MajoraLogger.getLogger().info("enable airplane-mode");
+            List<String> msg = CombineShellWrapper.run("cmd connectivity airplane-mode enable");
+            MajoraLogger.getLogger().info(Joiner.join(msg, str -> str + "\n"));
             Thread.sleep(5000);
-            Shell.SU.run("settings put global airplane_mode_on 0 &&  am broadcast -a android.intent.action.AIRPLANE_MODE --ez state false");
+            MajoraLogger.getLogger().info("disable airplane-mode");
+            msg = CombineShellWrapper.run("cmd connectivity airplane-mode disable");
+            MajoraLogger.getLogger().info(Joiner.join(msg, str -> str + "\n"));
         } catch (Exception e) {
             MajoraLogger.getLogger().info("reDial error", e);
         }
