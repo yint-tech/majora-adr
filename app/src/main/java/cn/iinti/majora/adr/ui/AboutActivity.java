@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+
 import cn.iinti.majora.adr.R;
 import cn.iinti.majora.adr.utils.NavUtil;
 import cn.iinti.majora.adr.utils.ThemeUtil;
@@ -35,12 +36,7 @@ public class AboutActivity extends MajoraBaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(view -> finish());
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -78,32 +74,19 @@ public class AboutActivity extends MajoraBaseActivity {
             } catch (NameNotFoundException ignored) {
             }
 
-            licensesView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    createLicenseDialog();
-                }
+            licensesView.setOnClickListener(v1 -> createLicenseDialog());
+
+            developersView.setOnClickListener(v12 -> {
+                MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                        .title(R.string.about_developers_label)
+                        .content(R.string.about_developers)
+                        .positiveText(android.R.string.ok)
+                        .show();
+
+                ((TextView) dialog.findViewById(R.id.md_content)).setMovementMethod(LinkMovementMethod.getInstance());
             });
 
-            developersView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                            .title(R.string.about_developers_label)
-                            .content(R.string.about_developers)
-                            .positiveText(android.R.string.ok)
-                            .show();
-
-                    ((TextView) dialog.findViewById(R.id.md_content)).setMovementMethod(LinkMovementMethod.getInstance());
-                }
-            });
-
-            sourceCodeView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NavUtil.startURL(getActivity(), getString(R.string.about_source));
-                }
-            });
+            sourceCodeView.setOnClickListener(v13 -> NavUtil.startURL(getActivity(), getString(R.string.about_source)));
 
             return v;
         }

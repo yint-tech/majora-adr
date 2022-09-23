@@ -35,23 +35,26 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    lintOptions {
-        abortOnError false
-    }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
     packagingOptions {
-        exclude 'META-INF/INDEX.LIST'
-        exclude 'META-INF/io.netty.versions.properties'
+        resources {
+            excludes += ['META-INF/INDEX.LIST', 'META-INF/io.netty.versions.properties']
+        }
+    }
+    lint {
+        abortOnError false
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-fragment:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:customtabs:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
@@ -63,11 +66,7 @@ dependencies {
 
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     implementation 'com.github.getActivity:XXPermissions:11.6'
-
-
-    // 悬浮窗框架：https://github.com/getActivity/XToast
     implementation 'com.github.getActivity:XToast:8.1'
-
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.1'
     implementation 'com.afollestad.material-dialogs:commons:0.9.0.2'
 

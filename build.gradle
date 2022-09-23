@@ -18,7 +18,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath 'net.sf.proguard:proguard-gradle:6.1.1'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -51,7 +51,7 @@ allprojects {
             maven { url 'https://jitpack.io' }
             maven {
                 name "IntMaven"
-                url "http://nexus.iinti.cn/repository/maven-public/"
+                url "https://nexus.iinti.cn/repository/maven-public/"
             }
         }
     }

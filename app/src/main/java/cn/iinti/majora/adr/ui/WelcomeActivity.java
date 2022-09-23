@@ -27,6 +27,7 @@ import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 import com.hjq.xtoast.XToast;
 import com.hjq.xtoast.draggable.SpringDraggable;
+
 import cn.iinti.majora.adr.majora.MajoraClientService;
 import cn.iinti.majora.adr.R;
 import cn.iinti.majora.adr.TheApp;
@@ -82,12 +83,7 @@ public class WelcomeActivity extends MajoraBaseActivity implements NavigationVie
 
         if (savedInstanceState == null) {
             mDrawerHandler.removeCallbacksAndMessages(null);
-            mDrawerHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    navigate(mSelectedId);
-                }
-            }, 250);
+            mDrawerHandler.postDelayed(() -> navigate(mSelectedId), 250);
 
             boolean openDrawer = prefs.getBoolean("open_drawer", false);
 
@@ -168,12 +164,7 @@ public class WelcomeActivity extends MajoraBaseActivity implements NavigationVie
         mSelectedId = mNavigationView.getMenu().getItem(itemId).getItemId();
         mNavigationView.getMenu().findItem(mSelectedId).setChecked(true);
         mDrawerHandler.removeCallbacksAndMessages(null);
-        mDrawerHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                navigate(mSelectedId);
-            }
-        }, 250);
+        mDrawerHandler.postDelayed(() -> navigate(mSelectedId), 250);
         mDrawerLayout.closeDrawers();
     }
 
@@ -244,12 +235,7 @@ public class WelcomeActivity extends MajoraBaseActivity implements NavigationVie
         menuItem.setChecked(true);
         mSelectedId = menuItem.getItemId();
         mDrawerHandler.removeCallbacksAndMessages(null);
-        mDrawerHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                navigate(mSelectedId);
-            }
-        }, 250);
+        mDrawerHandler.postDelayed(() -> navigate(mSelectedId), 250);
         mDrawerLayout.closeDrawers();
         return true;
     }

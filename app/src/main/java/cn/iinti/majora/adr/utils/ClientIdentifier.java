@@ -36,7 +36,7 @@ public class ClientIdentifier {
         if (file.exists()) {
             try {
                 String s = CommonUtils.readFile(file);
-                if (s != null && !s.isEmpty() && !s.startsWith(UN_RESOLVE)) {
+                if (!s.isEmpty() && !s.startsWith(UN_RESOLVE)) {
                     clientIdInMemory = s;
                     return clientIdInMemory;
                 }

@@ -1,6 +1,7 @@
 package cn.iinti.majora.adr.majora;
 
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
 import cn.iinti.majora.adr.TheApp;
@@ -63,12 +64,7 @@ public class MajoraClientService {
                 if (!autoRedial) {
                     sleepMinutes = 5;
                 }
-                try {
-                    Thread.sleep(sleepMinutes * 60 * 1000);
-                } catch (InterruptedException e) {
-                    //ignore
-                    return;
-                }
+                SystemClock.sleep(sleepMinutes * 60 * 1000);
                 if (autoRedial) {
                     reDial(2000);
                 }

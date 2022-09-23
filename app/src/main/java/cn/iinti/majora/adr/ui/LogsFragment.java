@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.hjq.permissions.XXPermissions;
+
 import cn.iinti.majora.adr.R;
 import cn.iinti.majora.adr.TheApp;
 import cn.iinti.majora.adr.majora.UILoggerHelper;
@@ -119,50 +120,20 @@ public class LogsFragment extends Fragment {
     }
 
     private void scrollTop() {
-        mSVLog.post(new Runnable() {
-            @Override
-            public void run() {
-                mSVLog.scrollTo(0, 0);
-            }
-        });
-        mHSVLog.post(new Runnable() {
-            @Override
-            public void run() {
-                mHSVLog.scrollTo(0, 0);
-            }
-        });
+        mSVLog.post(() -> mSVLog.scrollTo(0, 0));
+        mHSVLog.post(() -> mHSVLog.scrollTo(0, 0));
     }
 
     private void scrollDown() {
-        mSVLog.post(new Runnable() {
-            @Override
-            public void run() {
-                mSVLog.scrollTo(0, mTxtLog.getHeight());
-            }
-        });
-        mHSVLog.post(new Runnable() {
-            @Override
-            public void run() {
-                mHSVLog.scrollTo(0, 0);
-            }
-        });
+        mSVLog.post(() -> mSVLog.scrollTo(0, mTxtLog.getHeight()));
+        mHSVLog.post(() -> mHSVLog.scrollTo(0, 0));
     }
 
     private void reloadErrorLog() {
         UILoggerHelper.forceCloseWriter();
         new LogsReader().execute(mFileErrorLog);
-        mSVLog.post(new Runnable() {
-            @Override
-            public void run() {
-                mSVLog.scrollTo(0, mTxtLog.getHeight());
-            }
-        });
-        mHSVLog.post(new Runnable() {
-            @Override
-            public void run() {
-                mHSVLog.scrollTo(0, 0);
-            }
-        });
+        mSVLog.post(() -> mSVLog.scrollTo(0, mTxtLog.getHeight()));
+        mHSVLog.post(() -> mHSVLog.scrollTo(0, 0));
     }
 
     private void clear() {
@@ -195,12 +166,7 @@ public class LogsFragment extends Fragment {
         if (requestCode == WRITE_EXTERNAL_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (mClickedMenuItem != null) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            onOptionsItemSelected(mClickedMenuItem);
-                        }
-                    }, 500);
+                    new Handler().postDelayed(() -> onOptionsItemSelected(mClickedMenuItem), 500);
                 }
             } else {
                 Toast.makeText(getActivity(), R.string.permissionNotGranted, Toast.LENGTH_LONG).show();

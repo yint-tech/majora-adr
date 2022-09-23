@@ -26,12 +26,7 @@ public class SupportActivity extends MajoraBaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(view -> finish());
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -68,19 +63,16 @@ public class SupportActivity extends MajoraBaseActivity {
             if (!RomUtils.checkApkExist(getActivity(), "com.eg.android.AlipayGphone")) {
                 linearLayout.setVisibility(View.GONE);
             } else {
-                linearLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String intentFullUrl = "intent://platformapi/startapp?saId=10000007&" +
-                                "clientVersion=3.7.0.0718&qrcode=https%3A%2F%2Fqr.alipay.com%2FFKX05428F2CIZP9P1BZN9A%3F_s" +   //这里的URLcode换成扫码得到的结果
-                                "%3Dweb-other&_t=" + System.currentTimeMillis() + "#Intent;" +
-                                "scheme=alipayqr;package=com.eg.android.AlipayGphone;end";
-                        try {
-                            Intent intent = Intent.parseUri(intentFullUrl, Intent.URI_INTENT_SCHEME);
-                            getActivity().startActivity(intent);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                linearLayout.setOnClickListener(v1 -> {
+                    String intentFullUrl = "intent://platformapi/startapp?saId=10000007&" +
+                            "clientVersion=3.7.0.0718&qrcode=https%3A%2F%2Fqr.alipay.com%2FFKX05428F2CIZP9P1BZN9A%3F_s" +
+                            "%3Dweb-other&_t=" + System.currentTimeMillis() + "#Intent;" +
+                            "scheme=alipayqr;package=com.eg.android.AlipayGphone;end";
+                    try {
+                        Intent intent = Intent.parseUri(intentFullUrl, Intent.URI_INTENT_SCHEME);
+                        getActivity().startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 });
 
@@ -90,12 +82,7 @@ public class SupportActivity extends MajoraBaseActivity {
         }
 
         public void setupView(View v, final int url) {
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NavUtil.startURL(getActivity(), getString(url));
-                }
-            });
+            v.setOnClickListener(v1 -> NavUtil.startURL(getActivity(), getString(url)));
         }
     }
 }
