@@ -43,7 +43,7 @@ public class CombineShellWrapper {
             return;
         }
         shizukuAvailable = true;
-        if (!Shizuku.isPreV11() || Shizuku.checkSelfPermission() != PERMISSION_GRANTED) {
+        if (!Shizuku.isPreV11() && Shizuku.checkSelfPermission() != PERMISSION_GRANTED) {
             Shizuku.requestPermission(111);
         } else {
             hasShizukuPermission = true;
@@ -57,7 +57,8 @@ public class CombineShellWrapper {
     };
 
 
-    private static final class ShizukuShellService extends IShellService.Stub {
+    // 需要是public，否则shizhuku在反射的时候无法创建远端service
+    public static final class ShizukuShellService extends IShellService.Stub {
 
         @Override
         public List<String> run(String cmd) {
@@ -117,11 +118,6 @@ public class CombineShellWrapper {
         if ((shizukuAvailable && hasShizukuPermission && shellService != null)) {
             // use shizuku
             IShellService localShellService = shellService;
-            if (localShellService == null) {
-                // 编辑器告警在乱搞，在高并发极限情况这里是可能为null的
-                MajoraLogger.getLogger().warn("shizuku lost connection");
-                return Collections.emptyList();
-            }
             try {
                 return localShellService.run(cmd);
             } catch (RemoteException e) {

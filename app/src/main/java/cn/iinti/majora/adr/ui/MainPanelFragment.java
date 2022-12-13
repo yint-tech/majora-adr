@@ -65,7 +65,7 @@ public class MainPanelFragment extends Fragment {
             if (CombineShellWrapper.available()) {
                 MajoraClientService.reDial(1000);
             } else {
-                Toast.makeText(getActivity(), "重播需要root权限", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "重播需要root/adb(shizhuku)权限", Toast.LENGTH_SHORT).show();
             }
         });
 
