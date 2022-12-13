@@ -9,8 +9,8 @@ android {
         minSdkVersion 19
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
-        versionCode 7
-        versionName "1.8"
+        versionCode 9
+        versionName "1.9"
         archivesBaseName = "Majora_${versionName}".replace(' ', '_')
     }
 
