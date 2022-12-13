@@ -62,18 +62,22 @@ public class UILoggerHelper {
     }
 
     public static void forceCloseWriter() {
-        lastLogWriterCreateTimestamp = 0;
+        lastLogWriterAdaptTimestamp = 0;
         appendLog(Logger.INFO, "do close logFile", null);
     }
 
     private static BufferedWriter adaptLogWriter() throws IOException {
-        if (System.currentTimeMillis() - lastLogWriterCreateTimestamp < 25000) {
-            logWriter.close();
-            clearLogFileIfNeed();
-        } else if (logWriter != null) {
+        if (System.currentTimeMillis() - lastLogWriterAdaptTimestamp < 120_000 && logWriter != null) {
             return logWriter;
         }
-        lastLogWriterCreateTimestamp = System.currentTimeMillis();
+        lastLogWriterAdaptTimestamp = System.currentTimeMillis();
+        if (logWriter != null) {
+            if (logFile.length() < MAX_LOG_SIZE) {
+                return logWriter;
+            }
+            logWriter.close();
+        }
+        clearLogFileIfNeed();
         logWriter = new BufferedWriter(new FileWriter(logFile, true));
         return logWriter;
     }
@@ -130,7 +134,7 @@ public class UILoggerHelper {
 
     private static final int MAX_LOG_SIZE = 1024 * 1024; // 1Mb
     private static long lastFlushLogTimestamp = 0;
-    private static long lastLogWriterCreateTimestamp = 0;
+    private static long lastLogWriterAdaptTimestamp = 0;
     private static BufferedWriter logWriter = null;
 
     private static final File logFile = TheApp.getApplication().getLogFile();
