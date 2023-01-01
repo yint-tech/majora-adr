@@ -112,13 +112,14 @@ public class CombineShellWrapper {
 
     public static List<String> run(String cmd) {
         if (Shell.SU.available()) {
+            MajoraLogger.getLogger().info("run cmd with su: " + cmd);
             return Shell.SU.run(cmd);
-
         }
         if ((shizukuAvailable && hasShizukuPermission && shellService != null)) {
             // use shizuku
             IShellService localShellService = shellService;
             try {
+                MajoraLogger.getLogger().info("run cmd with shizhuku: " + cmd);
                 return localShellService.run(cmd);
             } catch (RemoteException e) {
                 MajoraLogger.getLogger().warn("execute remote cmd error", e);
@@ -126,7 +127,6 @@ public class CombineShellWrapper {
             }
         }
         MajoraLogger.getLogger().warn("call redial ,but no su or shizuku available");
-
         return Collections.emptyList();
     }
 }

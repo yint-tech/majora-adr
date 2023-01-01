@@ -1,6 +1,7 @@
 package cn.iinti.majora.adr.majora;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
@@ -15,10 +16,26 @@ import cn.iinti.majora.adr.utils.PermissionUtils;
 import cn.iinti.majora.client.sdk.client.MajoraClient;
 import cn.iinti.majora.client.sdk.cmd.handlers.RedialHandler;
 import cn.iinti.majora.client.sdk.log.MajoraLogger;
+import eu.chainfire.libsuperuser.Debug;
 
 public class MajoraClientService {
     private static boolean started = false;
     private static MajoraClient majoraClient;
+    /**
+     * 低版本没有cmd命令，但是低版本权限拦截更低，adb权限可以使用broadcast
+     * 高版本可以使用cmd命令，并且cmd可以在adb权限下使用，相对应的adb权限不能使用broadcast
+     */
+    private static final String airplaneOnCmd = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P ?
+            "cmd connectivity airplane-mode enable" : "settings put global airplane_mode_on 1 && am broadcast -a android.intent.action.AIRPLANE_MODE --ez state true";
+    private static final String airplaneOffCmd = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P ?
+            "cmd connectivity airplane-mode disable" : "settings put global airplane_mode_on 0 &&  am broadcast -a android.intent.action.AIRPLANE_MODE --ez state false";
+
+
+    static {
+        Debug.setDebug(true);
+        Debug.setSanityChecksEnabled(false);
+        Debug.setOnLogListener((type, typeIndicator, message) -> MajoraLogger.getLogger().info("shell log-> " + message));
+    }
 
     private static class RemoteRedialOperator implements RedialHandler.RedialOperator {
 
@@ -123,11 +140,11 @@ public class MajoraClientService {
     private static void reDialImpl() {
         try {
             MajoraLogger.getLogger().info("enable airplane-mode");
-            List<String> msg = CombineShellWrapper.run("cmd connectivity airplane-mode enable");
+            List<String> msg = CombineShellWrapper.run(airplaneOnCmd);
             MajoraLogger.getLogger().info(Joiner.join(msg, str -> str + "\n"));
             Thread.sleep(5000);
             MajoraLogger.getLogger().info("disable airplane-mode");
-            msg = CombineShellWrapper.run("cmd connectivity airplane-mode disable");
+            msg = CombineShellWrapper.run(airplaneOffCmd);
             MajoraLogger.getLogger().info(Joiner.join(msg, str -> str + "\n"));
         } catch (Exception e) {
             MajoraLogger.getLogger().info("reDial error", e);
