@@ -9,8 +9,8 @@ android {
         minSdkVersion 19
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
-        versionCode 20
-        versionName "2.0"
+        versionCode 21
+        versionName "2.21"
         archivesBaseName = "Majora_${versionName}".replace(' ', '_')
     }
 
@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
 
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
-    implementation "cn.iinti.majora:majora-sdk:1.2"
+    implementation "cn.iinti.majora:majora-sdk:1.5"
     implementation 'eu.chainfire:libsuperuser:1.0.0.201608240809'
 
 
